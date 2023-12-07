@@ -1,6 +1,7 @@
 let gameOver = false;
 let restartGame = false; // New flag to indicate whether to restart the game
 
+
 function setGameOver() {
     gameOver = true;
 }
@@ -8,6 +9,7 @@ function setGameOver() {
 function resetGame() {
     gameOver = false;
     restartGame = false; // Reset the restartGame flag
+   
 }
 
 function isGameOver() {
