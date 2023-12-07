@@ -9,6 +9,20 @@ addEventListener("keydown", (e)=>{
     if(e.code == 'KeyS') vy=SPEED;
     // console.log(e.code);
     // console.log(vx);
+
+    if (e.code === 'Space') {
+        if (shouldRestartGame()) {
+            // If should restart, reset the game
+            resetGame();
+            player.x = 0;
+            player.y = 0;
+            obstacleManager.reset();
+            animate();
+        } else {
+            // Otherwise, set the restart flag
+            setRestartGame();
+        }
+    }
 });
 
 addEventListener("keyup", (e)=>{

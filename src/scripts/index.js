@@ -1,16 +1,28 @@
+
+
+// variables
 let canvas = document.querySelector(".canvas");
 const ctx = canvas.getContext('2d');
 
 let x = 0;
 let y = 0;
 
+// new player
 const player = new Character(x, y, 50, 50);
+const obstacleManager = new ObstacleManager(5, 30, 30, canvas.width, canvas.height);
 
 
 
 const animate = ()=>{
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
+      // Draw obstacles
+      obstacleManager.draw(ctx);
+
+
+    // Check for collision
+    checkCollision(player, obstacleManager.obstacles);
+
     // update player position
     player.x += vx;
     player.y += vy;
@@ -23,6 +35,9 @@ const animate = ()=>{
 
     // Draw the player
     player.draw(ctx);
+
+       // Draw the game over screen if the game is over
+       drawGameOverScreen(ctx, canvas);
 
     requestAnimationFrame(animate);
 }

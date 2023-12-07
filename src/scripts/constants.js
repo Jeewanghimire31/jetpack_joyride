@@ -1,1 +1,1 @@
-const SPEED = 5;
+const SPEED = 3;
