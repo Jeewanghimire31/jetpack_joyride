@@ -10,7 +10,7 @@ let y = 250;
 // new player
 const player = new Character(x, y, 50, 50);
 
-const obstacleManager = new ObstacleManager(5, 30, 30, canvas.width, canvas.height, SPEED);
+const obstacleManager = new ObstacleManager(3, 30, 30, canvas.width, canvas.height, SPEED);
 
 
 const background = new Background(canvas, ctx);
