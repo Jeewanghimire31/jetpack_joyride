@@ -5,7 +5,7 @@ let canvas = document.querySelector(".canvas");
 const ctx = canvas.getContext('2d');
 
 let x = 70;
-let y = 250;
+let y = canvas.height;
 
 // new player
 const player = new Character(x, y, 50, 50);

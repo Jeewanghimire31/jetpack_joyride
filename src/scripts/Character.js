@@ -13,5 +13,10 @@ class Character {
     draw(ctx){
         ctx.fillStyle = this.color;
         ctx.fillRect (this.x, this.y, this.width, this.height);
+        this.y += this.vy;
+        this.applyGravity();
+    }
+    applyGravity() {
+        this.vy += GRAVITY;
     }
 }
