@@ -39,7 +39,7 @@ const animate = ()=>{
     // player.x += vx;
     player.y += vy;
 
-    // // Check boundaries to prevent going outside the canvas
+    // Check boundaries to prevent going outside the canvas
     // if (player.x < 0) player.x = 0;
     if (player.y < 0) player.y = 0;
     // if (player.x + player.width > canvas.width) player.x = canvas.width - player.width;
