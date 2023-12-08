@@ -8,6 +8,9 @@ addEventListener("keydown", (e)=>{
 
    
     if(e.code == 'KeyW'){
+        // shoot bullets
+        player.shoot();
+        // move player upward
         player.vy=-currentSpeed;
         
     } 
@@ -23,12 +26,5 @@ addEventListener("keyup", (e)=>{
    
 if (e.code === 'Space') {
     resetGame();
-    // if (shouldRestartGame()) {
-    //     // If should restart, reset the game
-    //     resetGame();
-    // } else {
-    //     // Otherwise, set the restart flag
-    //     setRestartGame();
-    // }
 }
 });
