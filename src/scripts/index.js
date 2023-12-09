@@ -12,6 +12,7 @@ const player = new Character(x, y, 50, 50);
 
 const obstacleManager = new ObstacleManager(3, 30, 30, canvas.width, canvas.height, 2,100);
 
+const audio=document.querySelector("#audio")
 
 const background = new Background(canvas, ctx);
 
@@ -60,4 +61,4 @@ const animate = ()=>{
     requestAnimationFrame(animate);
 }
 
-animate();
+// animate();

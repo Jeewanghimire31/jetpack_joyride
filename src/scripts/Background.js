@@ -12,6 +12,7 @@ class Background {
     }
 
     update() {
+        if(gameOver) return;
         this.position -= this.speed;
         
         // If the first image is completely off-screen to the left, reset its position

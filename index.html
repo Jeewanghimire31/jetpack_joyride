@@ -1,13 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JetPack JoyRide</title>
     <link rel="stylesheet" href="/src/styles/main.css">
 </head>
+
 <body>
-    <canvas id="canvas" class="canvas" width="500" height="500"></canvas>
+    <div id="landingPage">
+        <div class="image_wrapper">
+            <img src="./src/img/landing/first.svg" alt="landing_img">
+            <!-- <img src="./src/img/landing/second.svg" alt="landing_img"> -->
+            
+        </div>
+        <button id="startGameButton">Play Game</button>
+    </div>
+    <audio src="./src/music/music.mp3" id="audio" style="display: none;"></audio>
+
+    <div id="gameContainer" style="display: none;">
+        <!-- game canvas -->
+        <canvas id="canvas" class="canvas" width="500" height="500"></canvas>
+    </div>
+
     <script src="/src/scripts/constants.js"></script>
     <script src="/src/scripts/utils.js"></script>
     <script src="/src/scripts/Bullet.js"></script>
@@ -20,5 +36,7 @@
     <script src="/src/scripts/gameOver.js"></script>
     <script src="/src/scripts/Background.js"></script>
     <script src="/src/scripts/index.js"></script>
+    <script src="/src/scripts/landing.js"></script>
 </body>
+
 </html>

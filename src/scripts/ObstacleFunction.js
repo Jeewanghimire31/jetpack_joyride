@@ -44,6 +44,7 @@ class ObstacleManager {
 
     
     update() {
+        if(gameOver) return;
         this.obstacles.forEach((obstacle) => {
             obstacle.x -= this.speed;
 

@@ -35,7 +35,10 @@ function checkCollision(character, obstacles, coins) {
       if (isCollision(character, coin)) {
         console.log('Collision with coin detected!');
         // Handle collision logic with coins here
-       
+
+        // coin sound logic
+       let coinAudio = new Audio("https://www.superluigibros.com/downloads/sounds/SNES/SMK/wav/coin.wav");
+       coinAudio.play();
         // Remove the collected coin
         coins.splice(index, 1);
       }

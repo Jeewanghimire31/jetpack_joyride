@@ -4,7 +4,48 @@
     box-sizing: border-box;
 }
 
+
 .canvas{
     border: 1px solid red;
     margin: 1rem;
+}
+
+
+#landingPage {
+    position: relative;
+    height: 100vh; 
+
+
+.image_wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+}
+
+#startGameButton {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+
+        padding: .75rem 1.25rem;
+        border-radius: 10rem;
+        text-transform: uppercase;
+        font-size: 1rem;
+        letter-spacing: .15rem;
+        appearance: none;
+        cursor: pointer;
+
+        &:hover {
+            color: #fff;
+            background-color: #000;
+          }
+}
 }
