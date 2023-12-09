@@ -7,4 +7,40 @@
 .canvas {
   border: 1px solid red;
   margin: 1rem;
+}
+
+#landingPage {
+  position: relative;
+  height: 100vh;
+}
+#landingPage .image_wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+#landingPage .image_wrapper img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+#landingPage #startGameButton {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  padding: 0.75rem 1.25rem;
+  border-radius: 10rem;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: 0.15rem;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  cursor: pointer;
+}
+#landingPage #startGameButton:hover {
+  color: #fff;
+  background-color: #000;
 }/*# sourceMappingURL=main.css.map */
