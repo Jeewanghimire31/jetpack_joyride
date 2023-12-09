@@ -1,9 +1,11 @@
 let gameOver = false;
 let restartGame = false; // New flag to indicate whether to restart the game
-
+let gameOver_audio = new Audio("http://www.mario-museum.net/sons/smb_mat.wav");
 
 function setGameOver() {
     gameOver = true;
+    mySound.pause();
+    gameOver_audio.play();
 }
 
 function resetGame() {
