@@ -9,7 +9,7 @@ addEventListener("keydown", (e)=>{
    
     if(e.code == 'KeyW'){
         // shoot bullets
-        player.shoot();
+        player.shoot(-95);
         // move player upward
         player.vy=-currentSpeed;
         
@@ -26,5 +26,6 @@ addEventListener("keyup", (e)=>{
    
 if (e.code === 'Space') {
     resetGame();
+    mySound.play();
 }
 });
