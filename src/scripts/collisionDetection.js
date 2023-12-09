@@ -1,13 +1,13 @@
 
-function checkCollision(character, obstacles) {
-    obstacles.forEach((obstacle) => {
-        if (isCollision(character, obstacle)) {
-            console.log('Collision detected!');
-            // Handle collision logic here if needed
-            setGameOver();
-        }
-    });
-}
+// function checkCollision(character, obstacles) {
+//     obstacles.forEach((obstacle) => {
+//         if (isCollision(character, obstacle)) {
+//             console.log('Collision detected!');
+//             // Handle collision logic here if needed
+//             setGameOver();
+//         }
+//     });
+// }
 
 function isCollision(character, obstacle) {
     return (
@@ -20,3 +20,25 @@ function isCollision(character, obstacle) {
     );
 }
 
+
+
+function checkCollision(character, obstacles, coins) {
+    obstacles.forEach((obstacle) => {
+      if (isCollision(character, obstacle)) {
+        console.log('Collision with obstacle detected!');
+        // Handle collision logic with obstacles here if needed
+        setGameOver();
+      }
+    });
+  
+    coins.forEach((coin, index) => {
+      if (isCollision(character, coin)) {
+        console.log('Collision with coin detected!');
+        // Handle collision logic with coins here
+       
+        // Remove the collected coin
+        coins.splice(index, 1);
+      }
+    });
+  }
+  

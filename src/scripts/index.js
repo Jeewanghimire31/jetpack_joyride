@@ -10,7 +10,7 @@ let y = canvas.height;
 // new player
 const player = new Character(x, y, 50, 50);
 
-const obstacleManager = new ObstacleManager(3, 30, 30, canvas.width, canvas.height, SPEED);
+const obstacleManager = new ObstacleManager(3, 30, 30, canvas.width, canvas.height, 2,100);
 
 
 const background = new Background(canvas, ctx);
@@ -31,9 +31,15 @@ const animate = ()=>{
     // Update obstacles
     obstacleManager.update();
 
+    // Draw coins
+  obstacleManager.update();
+  obstacleManager.coins.forEach((coin) => {
+    coin.draw(ctx);
+  });
+
 
     // Check for collision
-    checkCollision(player, obstacleManager.obstacles);
+    checkCollision(player, obstacleManager.obstacles, obstacleManager.coins);
 
     // update player position
     // player.x += vx;
