@@ -2,11 +2,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .canvas {
   border: 1px solid red;
-  margin: 1rem;
+  overflow: hidden;
+  position: relative;
 }
 
 #landingPage {
@@ -43,4 +45,22 @@
 #landingPage #startGameButton:hover {
   color: #fff;
   background-color: #000;
+}
+
+.scorecard {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.distance {
+  color: white;
+  padding: 1rem;
+  font-size: 3rem;
+}
+
+.coins {
+  color: yellow;
+  padding: 0 1rem;
+  font-size: 3rem;
 }/*# sourceMappingURL=main.css.map */

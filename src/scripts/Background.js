@@ -5,7 +5,7 @@ class Background {
         
         this.canvas = canvas;
         this.ctx = ctx;
-        this.speed = 1;
+        this.speed = 5;
         this.position = 0;
         this.bgImage = new Image();
         this.bgImage.src = "background.png";

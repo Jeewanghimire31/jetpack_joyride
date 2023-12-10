@@ -1,2 +1,2 @@
-const SPEED = 5;
-const GRAVITY = 0.15;
+const SPEED = 10;
+const GRAVITY = 0.5;
