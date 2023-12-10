@@ -4,7 +4,7 @@
 let canvas = document.querySelector(".canvas");
 const ctx = canvas.getContext('2d');
 
-let x = 70;
+let x = 250;
 let y = canvas.height;
 
 // new player
@@ -55,10 +55,8 @@ const animate = ()=>{
     // Draw the player
     player.draw(ctx);
 
-       // Draw the game over screen if the game is over
-       drawGameOverScreen(ctx, canvas);
+
 
     requestAnimationFrame(animate);
 }
 
-// animate();
