@@ -17,7 +17,7 @@ class Background {
         this.position -= this.speed;
 
          // Call the increaseDistance function
-         this.increaseDistance(this.speed);
+         this.increaseDistance(1);
         
         // If the first image is completely off-screen to the left, reset its position
         if (this.position <= -this.canvas.width) {
