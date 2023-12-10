@@ -1,7 +1,7 @@
 
 class Background {
     
-    constructor(canvas, ctx) {
+    constructor(canvas, ctx, increaseDistance) {
         
         this.canvas = canvas;
         this.ctx = ctx;
@@ -9,11 +9,15 @@ class Background {
         this.position = 0;
         this.bgImage = new Image();
         this.bgImage.src = "background.png";
+        this.increaseDistance = increaseDistance;
     }
 
     update() {
         if(gameOver) return;
         this.position -= this.speed;
+
+         // Call the increaseDistance function
+         this.increaseDistance(this.speed);
         
         // If the first image is completely off-screen to the left, reset its position
         if (this.position <= -this.canvas.width) {

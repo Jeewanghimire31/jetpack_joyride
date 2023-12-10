@@ -92,5 +92,11 @@ class ObstacleManager {
 
     reset() {
         this.obstacles = generateRandomObstacles(this.obstacles.length, 30, 30, this.canvasWidth, this.canvasHeight);
+
+        // Reinitialize coins
+        this.coins = [];
+        this.lastCoinTime = Date.now();
+        this.coinGroupX = this.canvasWidth;
+        this.coinGroupY = getRandomNum(0, this.canvasHeight - 20);
     }
 }

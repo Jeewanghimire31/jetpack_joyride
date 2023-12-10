@@ -11,6 +11,12 @@ function setGameOver() {
 function resetGame() {
     gameOver = false;
     restartGame = false; // Reset the restartGame flag
+    distanceTravelled = 0;
+    coinsCollected = 0;
+    background.position = 0;
+    obstacleManager.reset();
+    Coin.reset();
+    
    
 }
 

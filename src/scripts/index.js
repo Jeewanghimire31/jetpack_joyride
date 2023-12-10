@@ -14,7 +14,7 @@ const obstacleManager = new ObstacleManager(3, 30, 30, canvas.width, canvas.heig
 
 const audio=document.querySelector("#audio")
 
-const background = new Background(canvas, ctx);
+const background = new Background(canvas, ctx, increaseDistance);
 
 
 
