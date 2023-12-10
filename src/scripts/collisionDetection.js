@@ -8,6 +8,7 @@
 //         }
 //     });
 // }
+let collisionCount = 0;
 
 function isCollision(character, obstacle) {
     return (
@@ -25,9 +26,21 @@ function isCollision(character, obstacle) {
 function checkCollision(character, obstacles, coins) {
     obstacles.forEach((obstacle) => {
       if (isCollision(character, obstacle)) {
+        const score=new Score()
         console.log('Collision with obstacle detected!');
+        score.updateHighScore(distanceTravelled);
+
+        // * this is needed after game over later on 
+        // score.updateHighScore(coinsCollected);
+
         // Handle collision logic with obstacles here if needed
-        setGameOver();
+        collisionCount +=1;
+        if(collisionCount == 1){
+          setGameOver();
+
+        }
+     
+
       }
     });
   
@@ -35,6 +48,8 @@ function checkCollision(character, obstacles, coins) {
       if (isCollision(character, coin)) {
         console.log('Collision with coin detected!');
         // Handle collision logic with coins here
+
+        increaseCoins();
 
         // coin sound logic
        let coinAudio = new Audio("https://www.superluigibros.com/downloads/sounds/SNES/SMK/wav/coin.wav");

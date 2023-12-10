@@ -22,5 +22,6 @@ function startGame() {
 
     // Start the animation loop
     animate();
+    gameStarted = true;
 }
 

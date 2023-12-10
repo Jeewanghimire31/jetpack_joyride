@@ -25,7 +25,10 @@ addEventListener("keyup", (e)=>{
     }
    
 if (e.code === 'Space') {
-    resetGame();
     mySound.play();
+    if(gameOver){  
+    resetGame();
+    
+}
 }
 });

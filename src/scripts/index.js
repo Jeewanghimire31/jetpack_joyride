@@ -4,17 +4,17 @@
 let canvas = document.querySelector(".canvas");
 const ctx = canvas.getContext('2d');
 
-let x = 70;
+let x = 250;
 let y = canvas.height;
 
 // new player
 const player = new Character(x, y, 50, 50);
 
-const obstacleManager = new ObstacleManager(3, 30, 30, canvas.width, canvas.height, 2,100);
+const obstacleManager = new ObstacleManager(3, 30, 30, canvas.width, canvas.height, 5,100);
 
 const audio=document.querySelector("#audio")
 
-const background = new Background(canvas, ctx);
+const background = new Background(canvas, ctx, increaseDistance);
 
 
 
@@ -55,10 +55,8 @@ const animate = ()=>{
     // Draw the player
     player.draw(ctx);
 
-       // Draw the game over screen if the game is over
-       drawGameOverScreen(ctx, canvas);
+
 
     requestAnimationFrame(animate);
 }
 
-// animate();

@@ -6,11 +6,19 @@ function setGameOver() {
     gameOver = true;
     mySound.pause();
     gameOver_audio.play();
+    drawGameOverScreen();
 }
 
 function resetGame() {
+    collisionCount = 0;
     gameOver = false;
     restartGame = false; // Reset the restartGame flag
+    distanceTravelled = 0;
+    coinsCollected = 0;
+    background.position = 0;
+    obstacleManager.reset();
+    removeDialogContainer();
+    // Coin.reset();
    
 }
 
@@ -27,13 +35,49 @@ function shouldRestartGame() {
 }
 
 
-function drawGameOverScreen(ctx, canvas) {
-    if (isGameOver()) {
-        ctx.fillStyle = 'blue';
-        ctx.font = '40px Arial';
-        ctx.fillText('Game Over', canvas.width / 2 - 100, canvas.height / 2 - 20);
-        ctx.font = '20px Arial';
-        ctx.fillText('Press Space to Restart', canvas.width / 2 - 130, canvas.height / 2 + 20);
-    }
+// draw gameOver screen after game over
+function drawGameOverScreen() {
+    
+        // Blur the canvas
+        canvas.style.filter = 'blur(30px)';
+
+        // Create the dialog box
+        const dialogContainer = document.createElement('div');
+        dialogContainer.classList.add("dialogContainer");
+        dialogContainer.innerHTML = `
+            <p class = "flew">You Flew</p>
+            <p class = "flew__Distance">${distanceTravelled}m</p>
+            <p class="flew__coinCollectedWhole">
+            <span class="flew__coinCollected_phrase">And Collected</span>
+            <br>
+            <span class="flew__coinCollected_coin">Coins: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ${coinsCollected} \u{1F4B0}</span>
+            </p>
+    
+            <p class="flew_restart">Press Space to Restart</p>
+        `;
+        
+        document.body.appendChild(dialogContainer);
+
+        // Remove the scorecard element
+  const scorecardElement = document.getElementById('scorecard');
+  if (scorecardElement) {
+    scorecardElement.remove();
+  }
+    
 }
+
+// remove gameover screen if need restart
+const removeDialogContainer = (()=>{
+
+    const dialogContainer = document.querySelector(".dialogContainer");
+    // Reset the blur on the canvas
+    canvas.style.filter = 'blur(0)';
+    
+    dialogContainer.remove();
+    console.log(dialogContainer);
+});
+
+
+
+
 
