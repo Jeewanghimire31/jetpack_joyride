@@ -1,5 +1,3 @@
-// scorecard.js
- 
 
 let distanceTravelled = 0;
 let coinsCollected = 0;
@@ -13,11 +11,16 @@ const createScorecardElement = (()=> {
     // elements for distance and coins
     distanceElement = document.createElement('div');
     coinsElement = document.createElement('div');
+
+    highScoreElement = document.createElement('div');
+    highScoreElement.classList.add('highScore');
+    
     
     distanceElement.classList.add('distance'); // class for styling distance
     coinsElement.classList.add('coins'); // class for styling coins
     
     scorecardElement.appendChild(distanceElement);
+    scorecardElement.appendChild(highScoreElement);
     scorecardElement.appendChild(coinsElement);
 
     document.body.appendChild(scorecardElement);
@@ -34,6 +37,7 @@ const updateScorecard = (() =>{
     
     // Update the content and styles
     distanceElement.textContent = `${distanceTravelled}m `;
+    highScoreElement.textContent = `Best : ${new Score().getHighScore()}m`;
     coinsElement.textContent = `${coinsCollected} \u{1F4B0}`;
 }});
 
@@ -49,3 +53,5 @@ const increaseCoins = (() => {
 
 // Call createScorecardElement to ensure the element is created when the script is loaded
 createScorecardElement();
+
+
