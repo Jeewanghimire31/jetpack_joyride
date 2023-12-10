@@ -55,12 +55,71 @@
 
 .distance {
   color: white;
-  padding: 1rem;
+  padding: 1rem 1rem 0.5rem;
   font-size: 3rem;
+}
+
+.highScore {
+  color: white;
+  font-size: 1.5rem;
+  padding: 0rem 1rem;
 }
 
 .coins {
   color: yellow;
-  padding: 0 1rem;
+  padding: 0rem 1rem;
   font-size: 3rem;
+}
+
+.dialogContainer {
+  padding: 0.5rem;
+  box-shadow: 3px 3px 5px 6px #ccc;
+  width: 500px;
+  height: 500px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  text-align: center;
+}
+.dialogContainer .flew {
+  color: #fff;
+  font-size: 2.5rem;
+}
+.dialogContainer .flew__Distance {
+  font-size: 6.5rem;
+  color: yellow;
+}
+.dialogContainer .flew__coinCollectedWhole {
+  padding: 1rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
+.dialogContainer .flew__coinCollectedWhole .flew__coinCollected_phrase {
+  padding: 1rem 0;
+  font-size: 2.5rem;
+  color: #fff;
+  margin: 1rem 0rem;
+}
+.dialogContainer .flew__coinCollectedWhole .flew__coinCollected_coin {
+  font-size: 4rem;
+  color: yellow;
+}
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.dialogContainer .flew_restart {
+  font-size: 3rem;
+  color: #00ffa5;
+  animation: blink 1s infinite;
+  font-weight: 700;
 }/*# sourceMappingURL=main.css.map */
