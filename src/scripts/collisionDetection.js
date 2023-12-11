@@ -1,13 +1,4 @@
 
-// function checkCollision(character, obstacles) {
-//     obstacles.forEach((obstacle) => {
-//         if (isCollision(character, obstacle)) {
-//             console.log('Collision detected!');
-//             // Handle collision logic here if needed
-//             setGameOver();
-//         }
-//     });
-// }
 let collisionCount = 0;
 
 function isCollision(character, obstacle) {
@@ -23,7 +14,9 @@ function isCollision(character, obstacle) {
 
 
 
-function checkCollision(character, obstacles, coins) {
+function checkCollision(character, obstacles, coins, aliens) {
+
+  // obstacle collision
     obstacles.forEach((obstacle) => {
       if (isCollision(character, obstacle)) {
         const score=new Score()
@@ -39,11 +32,10 @@ function checkCollision(character, obstacles, coins) {
           setGameOver();
 
         }
-     
-
       }
     });
   
+    // coins collision
     coins.forEach((coin, index) => {
       if (isCollision(character, coin)) {
         console.log('Collision with coin detected!');
@@ -58,5 +50,21 @@ function checkCollision(character, obstacles, coins) {
         coins.splice(index, 1);
       }
     });
+
+
+// Bullet-Alien Collision remains unchanged
+player.bullets.forEach((bullet, bulletIndex) => {
+  aliens.forEach((alien, alienIndex) => {
+      if (isCollision(bullet, alien)) {
+          console.log('Bullet hit alien!');
+          // Handle bullet hit alien logic here
+
+          // Remove the collided bullet and alien
+          player.bullets.splice(bulletIndex, 1);
+          aliens.splice(alienIndex, 1);
+      }
+  });
+});
+
   }
   

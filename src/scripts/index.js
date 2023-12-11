@@ -7,10 +7,15 @@ const ctx = canvas.getContext('2d');
 let x = 250;
 let y = canvas.height;
 
+// alien property
+const alienInterval = 1000; // Adjust the interval between alien appearances as needed
+let lastAlienTime = Date.now();
+
 // new player
 const player = new Character(x, y, 50, 50);
 
-const obstacleManager = new ObstacleManager(3, 30, 30, canvas.width, canvas.height, 5,100);
+// count, width, height, canvasWidth, canvasHeight, speed, interval, alienSpeed
+const obstacleManager = new ObstacleManager(3, 30, 30, canvas.width, canvas.height, 5,100, 2);
 
 const audio=document.querySelector("#audio")
 
@@ -32,15 +37,19 @@ const animate = ()=>{
     // Update obstacles
     obstacleManager.update();
 
-    // Draw coins
+    // Draw obstacles
   obstacleManager.update();
+
   obstacleManager.coins.forEach((coin) => {
     coin.draw(ctx);
   });
 
 
-    // Check for collision
-    checkCollision(player, obstacleManager.obstacles, obstacleManager.coins);
+    // // Check for collision
+    // checkCollision(player, obstacleManager.obstacles, obstacleManager.coins);
+
+    // Check for collision with obstacles, coins, and aliens
+    checkCollision(player, obstacleManager.obstacles, obstacleManager.coins, obstacleManager.aliens);
 
     // update player position
     // player.x += vx;
@@ -54,6 +63,24 @@ const animate = ()=>{
 
     // Draw the player
     player.draw(ctx);
+
+    // Update bullets and check for collisions with aliens
+    player.drawBullets(obstacleManager.aliens);
+
+    // Update aliens
+    // obstacleManager.updateAliens();
+
+    // Generate aliens at a certain interval
+    const currentTime = Date.now();
+    if (currentTime - lastAlienTime > alienInterval) {
+        obstacleManager.generateAliens();
+        lastAlienTime = currentTime;
+    }
+
+    // Draw aliens
+    obstacleManager.aliens.forEach((alien) => {
+        alien.draw(ctx);
+    });
 
 
 

@@ -1,16 +1,20 @@
 class ObstacleManager {
-    constructor(count, width, height, canvasWidth, canvasHeight, speed, interval) {
+    constructor(count, width, height, canvasWidth, canvasHeight, speed, interval, alienSpeed) {
         this.obstacles = generateRandomObstacles(count, width, height, canvasWidth, canvasHeight);
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
         this.speed = speed;
 
-        // Add coins property
+        // coins property
     this.coins = [];
     this.coinInterval = interval;
     this.lastCoinTime = Date.now();
     this.coinGroupX = canvasWidth; // Initial X position for the coin group
         this.coinGroupY = getRandomNum(0, canvasHeight - 20);
+
+        // alien property
+        this.alienSpeed = alienSpeed;
+        this.aliens = [];
     }
 
     // drawing obstacles which were generated in obstacle.js file
@@ -67,9 +71,17 @@ class ObstacleManager {
         if (this.coins.length === 0) {
             this.generateCoins();
         }
+        // coin update finish
+
+        // alien update start
+        this.aliens.forEach((alien) => {
+            alien.x -= alien.speed;
+        });
+        // alien property finish
         
     }
 
+    // coin property
     generateCoins() {
         const currentTime = Date.now();
         if (currentTime - this.lastCoinTime > this.coinInterval) {
@@ -78,7 +90,7 @@ class ObstacleManager {
                     this.coinGroupX + getRandomNum(0, 50), // Adjust the range based on your requirements
                     this.coinGroupY + getRandomNum(0, 50), // Adjust the range based on your requirements
                     20,
-                    20
+                    20 
                 );
                 this.coins.push(coin);
             }
@@ -98,5 +110,18 @@ class ObstacleManager {
         this.lastCoinTime = Date.now();
         this.coinGroupX = this.canvasWidth;
         this.coinGroupY = getRandomNum(0, this.canvasHeight - 20);
+    }
+
+
+    // alien property
+    generateAliens() {
+        const alien = new Alien(
+            this.canvasWidth,
+            this.canvasHeight - 30, // Adjust the height 
+            20, // Adjust width 
+            20, // Adjust height
+            this.alienSpeed
+        );
+        this.aliens.push(alien);
     }
 }
