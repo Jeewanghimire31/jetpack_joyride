@@ -15,7 +15,7 @@ let lastAlienTime = Date.now();
 const player = new Character(x, y, 50, 50);
 
 // count, width, height, canvasWidth, canvasHeight, speed, interval
-const obstacleManager = new ObstacleManager(3, 30, 30, canvas.width, canvas.height, 100);
+const obstacleManager = new ObstacleManager(1, 30, 30, canvas.width, canvas.height, 100);
 
 const audio=document.querySelector("#audio")
 
