@@ -37,7 +37,7 @@ class Character {
         const bullet = new Bullet(this.x + this.width-5, this.y + this.height, 5, 5, 5, vx, vy);
         const bullet2 = new Bullet(this.x, this.y + this.height, 5, 5, 5, -vx, vy);
         this.bullets.push(bullet, bullet2, bullet, bullet2);
-        console.log("yes i am hitting")
+        
 
         // bullet fire sound
         let bulletAudio = new Audio("https://rpg.hamsterrepublic.com/wiki-images/2/21/Collision8-Bit.ogg");
