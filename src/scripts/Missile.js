@@ -47,12 +47,12 @@ class Missile {
         this.startMissile();
       }
 
-      if(this.x < this.canvas.width){
-        const missileAudio = new Audio("https://commondatastorage.googleapis.com/codeskulptor-assets/sounddogs/explosion.ogg");
-      missileAudio.play();
-      }else{
-        missileAudio.pause();
-      }
+    //   if(this.x < this.canvas.width){
+    //     const missileAudio = new Audio("https://commondatastorage.googleapis.com/codeskulptor-assets/sounddogs/explosion.ogg");
+    //   missileAudio.play();
+    //   }else{
+    //     missileAudio.pause();
+    //   }
     }
   
 
