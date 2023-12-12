@@ -1,19 +1,18 @@
 class ObstacleManager {
-    constructor(count, width, height, canvasWidth, canvasHeight, speed, interval, alienSpeed) {
+    constructor(count, width, height, canvasWidth, canvasHeight, interval) {
         this.obstacles = generateRandomObstacles(count, width, height, canvasWidth, canvasHeight);
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
-        this.speed = speed;
+        this.speed = OBSTACLE_SPEED;
 
         // coins property
     this.coins = [];
     this.coinInterval = interval;
     this.lastCoinTime = Date.now();
     this.coinGroupX = canvasWidth; // Initial X position for the coin group
-        this.coinGroupY = getRandomNum(0, canvasHeight - 20);
+    this.coinGroupY = getRandomNum(0, canvasHeight - 150);
 
         // alien property
-        this.alienSpeed = alienSpeed;
         this.aliens = [];
     }
 
@@ -36,7 +35,7 @@ class ObstacleManager {
                 const distance = Math.abs(obstacle.x - otherObstacle.x) +
                                  Math.abs(obstacle.y - otherObstacle.y);
 
-                // Adjust the threshold as needed
+                //Distance between two obstacles
                 if (distance < 100) {
                     return true;
                 }
@@ -98,7 +97,7 @@ class ObstacleManager {
             this.lastCoinTime = currentTime;
             this.coinGroupSize = getRandomNum(5, 10);
             this.coinGroupX = canvas.width; // Reset X position for the next coin group
-            this.coinGroupY = getRandomNum(0, canvas.height - 20); // Reset Y position for the next coin group
+            this.coinGroupY = getRandomNum(0, canvas.height - 150); // Reset Y position for the next coin group
         }
     }
 
@@ -109,7 +108,7 @@ class ObstacleManager {
         this.coins = [];
         this.lastCoinTime = Date.now();
         this.coinGroupX = this.canvasWidth;
-        this.coinGroupY = getRandomNum(0, this.canvasHeight - 20);
+        this.coinGroupY = getRandomNum(0, this.canvasHeight - 150);
     }
 
 
@@ -120,7 +119,6 @@ class ObstacleManager {
             this.canvasHeight - 30, // Adjust the height 
             20, // Adjust width 
             20, // Adjust height
-            this.alienSpeed
         );
         this.aliens.push(alien);
     }

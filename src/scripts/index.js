@@ -14,8 +14,8 @@ let lastAlienTime = Date.now();
 // new player
 const player = new Character(x, y, 50, 50);
 
-// count, width, height, canvasWidth, canvasHeight, speed, interval, alienSpeed
-const obstacleManager = new ObstacleManager(3, 30, 30, canvas.width, canvas.height, 5,100, 2);
+// count, width, height, canvasWidth, canvasHeight, speed, interval
+const obstacleManager = new ObstacleManager(3, 30, 30, canvas.width, canvas.height, 100);
 
 const audio=document.querySelector("#audio")
 
@@ -87,3 +87,7 @@ const animate = ()=>{
     requestAnimationFrame(animate);
 }
 
+window.addEventListener("resize", (()=>{
+  canvas.width =  window.innerWidth;
+  canvas.height =  window.innerHeight;
+}))

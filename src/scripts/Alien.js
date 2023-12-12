@@ -5,8 +5,8 @@ class Alien {
         this.y = y;
         this.width = width;
         this.height = height;
-        this.speed = speed;
-        this.color = "#00FF00"; // Alien color, adjust as needed
+        this.speed = ALIEN_SPEED;
+        this.color = "#00FF00"; // Alien color
     }
 
     draw(ctx) {
