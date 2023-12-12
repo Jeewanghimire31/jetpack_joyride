@@ -139,6 +139,13 @@ img {
         color: #00ffa5;
             animation: blink 1s infinite;
             font-weight: 700;
-        }
-    
+        } 
 }
+
+#alert {
+    position: absolute;
+    display: none;
+    background-color: yellow;
+    color: #00ffa5;
+  }
+  
