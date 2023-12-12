@@ -4,17 +4,25 @@ let collisionCount = 0;
 function isCollision(character, obstacle) {
     return (
         // check the position of character and obstacles to detect
-        character.x + character.width > obstacle.x &&
-        character.x < obstacle.x + obstacle.width &&
-        character.y + character.height > obstacle.y &&
-        character.y < obstacle.y + obstacle.height 
+        character.x + character.width >= obstacle.x &&
+        character.x <= obstacle.x + obstacle.width &&
+        character.y + character.height >= obstacle.y &&
+        character.y <= obstacle.y + obstacle.height 
         
     );
 }
 
 
 
-function checkCollision(character, obstacles, coins, aliens) {
+function checkCollision(character, obstacles, coins, aliens, missile) {
+  if(isCollision(character, missile)){
+    console.log("ma yeha xu");
+    collisionCount +=1;
+        if(collisionCount == 1){
+          setGameOver();
+        }
+  }
+
 
   // obstacle collision
     obstacles.forEach((obstacle) => {

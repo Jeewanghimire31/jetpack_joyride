@@ -14,6 +14,7 @@ class ObstacleManager {
 
         // alien property
         this.aliens = [];
+        
     }
 
     // drawing obstacles which were generated in obstacle.js file

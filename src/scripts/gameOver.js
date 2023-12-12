@@ -74,7 +74,6 @@ const removeDialogContainer = (()=>{
     canvas.style.filter = 'blur(0)';
     
     dialogContainer.remove();
-    console.log(dialogContainer);
 });
 
 

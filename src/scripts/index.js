@@ -21,10 +21,16 @@ const audio=document.querySelector("#audio")
 
 const background = new Background(canvas, ctx, increaseDistance);
 
-
+// missile
+// const missile = new Missile(canvas, ctx);
+let missile;
 
 const animate = ()=>{
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    if(!missile) {
+      missile = new Missile(canvas, ctx);
+    }
 
     // Draw background
     background.update();
@@ -45,11 +51,8 @@ const animate = ()=>{
   });
 
 
-    // // Check for collision
-    // checkCollision(player, obstacleManager.obstacles, obstacleManager.coins);
-
     // Check for collision with obstacles, coins, and aliens
-    checkCollision(player, obstacleManager.obstacles, obstacleManager.coins, obstacleManager.aliens);
+    checkCollision(player, obstacleManager.obstacles, obstacleManager.coins, obstacleManager.aliens, missile);
 
     // update player position
     // player.x += vx;
@@ -82,12 +85,14 @@ const animate = ()=>{
         alien.draw(ctx);
     });
 
+    // Draw missiles
+  missile.drawMissile();
 
 
     requestAnimationFrame(animate);
 }
 
-window.addEventListener("resize", (()=>{
-  canvas.width =  window.innerWidth;
-  canvas.height =  window.innerHeight;
-}))
+// window.addEventListener("resize", (()=>{
+//   canvas.width =  window.innerWidth;
+//   canvas.height =  window.innerHeight;
+// }))
