@@ -27,7 +27,19 @@ function generateRandomObstacles(count, width, height, canvasWidth, canvasHeight
             width,
             height
         );
-        obstacles.push(obstacle);
+        // obstacles.push(obstacle);
+        const obstacle2 = new Obstacle(
+            // random position
+            obstacle.x + 50,
+            obstacle.y + 50,
+            width,
+            height
+        );
+        // obstacles.push(obstacle2);
+        // Create an object to represent the obstacle pair
+        const obstaclePair = { obstacle, obstacle2 };
+        obstacles.push(obstaclePair);
+        console.log(obstacles);
     }
 
     return obstacles;
