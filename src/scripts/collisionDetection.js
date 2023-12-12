@@ -13,7 +13,6 @@ function isCollision(character, obstacle) {
 }
 
 
-
 function checkCollision(character, obstacles, coins, aliens, missile) {
   if(isCollision(character, missile)){
     console.log("ma yeha xu");
@@ -24,24 +23,30 @@ function checkCollision(character, obstacles, coins, aliens, missile) {
   }
 
 
-  // obstacle collision
-    obstacles.forEach((obstacle) => {
-      if (isCollision(character, obstacle)) {
-        const score=new Score()
-        console.log('Collision with obstacle detected!');
+  // obstacle pair collision
+  obstacles.forEach((pair) => {
+    const obstacle1 = pair.obstacle;
+    const obstacle2 = pair.obstacle2;
+
+    // Check if the character is within the range of one obstacle to another
+    if (
+        character.x + character.width >= obstacle1.x &&
+        character.x <= obstacle2.x + obstacle2.width &&
+        character.y + character.height >= Math.min(obstacle1.y, obstacle2.y) &&
+        character.y <= Math.max(obstacle1.y + obstacle1.height, obstacle2.y + obstacle2.height)
+    ) {
+        const score = new Score();
+        console.log('Collision with obstacle pair detected!');
         score.updateHighScore(distanceTravelled);
 
-        // * this is needed after game over later on 
-        // score.updateHighScore(coinsCollected);
-
-        // Handle collision logic with obstacles here if needed
-        collisionCount +=1;
-        if(collisionCount == 1){
-          setGameOver();
-
+        // Handle collision logic with obstacle pairs here if needed
+        collisionCount += 1;
+        if (collisionCount == 1) {
+            setGameOver();
         }
-      }
-    });
+    }
+});
+
   
     // coins collision
     coins.forEach((coin, index) => {
