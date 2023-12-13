@@ -100,6 +100,7 @@ class ObstacleManager {
 
     // coin property
     generateCoins() {
+       
         const currentTime = Date.now();
         if (currentTime - this.lastCoinTime > this.coinInterval) {
             this.lastCoinTime = currentTime;
@@ -110,20 +111,19 @@ class ObstacleManager {
         let randomCoin = Math.floor(getRandomNum(0, coinPattern.length));
    this.cp = coinPattern[randomCoin];
   this.cp.forEach(coin => {
-    let coinX = this.coinGroupX + coin.x;
-    let coinY = this.coinGroupY + coin.y;
-
-    console.log(coinX, coinY);
     
-    const coinObj = new Coin(
-      this.coinGroupX + coin.x,
-      this.coinGroupY + coin.y,
-      20, 20
-    );
-    this.coins.push(coinObj);
 
+    
+            const coinObj = new Coin(
+                this.coinGroupX + coin.x,
+                this.coinGroupY + coin.y,
+                20, 20
+              );
+              this.coins.push(coinObj);
+      
  });
-        }
+    
+    }
     }
 
     reset() {
