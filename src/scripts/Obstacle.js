@@ -20,18 +20,24 @@ function generateRandomObstacles(count, width, height, canvasWidth, canvasHeight
     const obstacles = [];
 
     for (let i = 0; i < count; i++) {
+        let distanceX = getRandomNum(OBSTACLE_MIN_DISTANCE, OBSTACLE_MAX_DISTANCE);
+        let distanceY = getRandomNum(-OBSTACLE_MAX_DISTANCE, OBSTACLE_MAX_DISTANCE);
+        let obstacleX = canvasWidth;
+        let obstacleY = distanceY < 0 ? getRandomNum(-distanceY, canvasHeight - height) :getRandomNum(0, canvasHeight-2*height-distanceY)
+
+        // obstacle1 created
         const obstacle = new Obstacle(
             // random position
-            getRandomNum(0, canvasWidth - width),
-            getRandomNum(0, canvasHeight - height),
+            obstacleX,
+            obstacleY,
             width,
             height
         );
         // obstacles.push(obstacle);
         const obstacle2 = new Obstacle(
-            // random position
-            obstacle.x + 50,
-            obstacle.y + 50,
+            //position in near to obstacle1
+            obstacle.x + distanceX,
+            obstacle.y + distanceY,
             width,
             height
         );
