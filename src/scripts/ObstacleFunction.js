@@ -4,6 +4,9 @@ class ObstacleManager {
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
         this.speed = OBSTACLE_SPEED;
+        this.count = count;
+        this.width = width;
+        this.height = height;
 
         // coins property
     this.coins = [];
@@ -17,17 +20,29 @@ class ObstacleManager {
         
     }
 
-    // drawing obstacles which were generated in obstacle.js file
-    draw(ctx) {
-        this.obstacles.forEach(function (obstacle) {
-            while (this.isTooCloseToOtherObstacles(obstacle)) {
-                obstacle.x = getRandomNum(0, this.canvasWidth - obstacle.width);
-                obstacle.y = getRandomNum(0, this.canvasHeight - obstacle.height);
-            }
 
-            obstacle.draw(ctx);
-        }, this); 
-    }
+
+
+    draw(ctx) {
+        
+        // draw obstacles
+    this.obstacles.forEach((pair) => {
+        const obstacle1 = pair.obstacle;
+        const obstacle2 = pair.obstacle2;
+
+        // Draw the obstacles
+        obstacle1.draw(ctx);
+        obstacle2.draw(ctx);
+
+        // Draw a line between the obstacles
+        ctx.beginPath();
+        ctx.moveTo(obstacle1.x + obstacle1.width / 2, obstacle1.y + obstacle1.height / 2);
+        ctx.lineTo(obstacle2.x + obstacle2.width / 2, obstacle2.y + obstacle2.height / 2);
+        ctx.strokeStyle = "#000000"; // Set line color
+        ctx.stroke();
+    });
+}
+
 
     // checking that random generated obstacles are near to each other or not
     isTooCloseToOtherObstacles(obstacle) {
@@ -48,14 +63,28 @@ class ObstacleManager {
 
     
     update() {
-        if(gameOver) return;
-        this.obstacles.forEach((obstacle) => {
-            obstacle.x -= this.speed;
+        if (gameOver) return;
+        this.obstacles.forEach((obstaclePair) => {
+            const obstacle1 = obstaclePair.obstacle;
+            const obstacle2 = obstaclePair.obstacle2;
+    
+            obstacle1.x -= this.speed;
+            obstacle2.x -= this.speed;
+    
+            // Check if the obstacle1 is completely off-screen to the left, reset its position
+            // if (obstacle1.x + obstacle1.width < 0) {
+            //     obstacle1.x = this.canvasWidth; // Reset to the right side of the canvas
+            //     obstacle1.y = getRandomNum(0, this.canvasHeight - obstacle1.height); // Reset to a random y-coordinate
+            // }
+    
+            // // Check if the obstacle2 is completely off-screen to the left, reset its position
+            // if (obstacle2.x + obstacle2.width < 0) {
+            //     obstacle2.x = this.canvasWidth; // Reset to the right side of the canvas
+            //     obstacle2.y = getRandomNum(0, this.canvasHeight - obstacle2.height); // Reset to a random y-coordinate
+            // }
 
-            // If the obstacle is completely off-screen to the left, reset its position
-            if (obstacle.x + obstacle.width < 0) {
-                obstacle.x = this.canvasWidth; // Reset to the right side of the canvas
-                obstacle.y = getRandomNum(0, this.canvasHeight - obstacle.height); // Reset to a random y-coordinate
+            if (obstacle1.x + obstacle1.width < 0 && obstacle2.x + obstacle2.width < 0) {
+                this.obstacles = generateRandomObstacles(this.count, this.width, this.height, this.canvasWidth, this.canvasHeight);
             }
         });
 
@@ -86,14 +115,22 @@ class ObstacleManager {
         const currentTime = Date.now();
         if (currentTime - this.lastCoinTime > this.coinInterval) {
             for (let i = 0; i < this.coinGroupSize; i++) {
-                const coin = new Coin(
-                    this.coinGroupX + getRandomNum(0, 50), // Adjust the range based on your requirements
-                    this.coinGroupY + getRandomNum(0, 50), // Adjust the range based on your requirements
-                    20,
-                    20 
-                );
-                this.coins.push(coin);
-            }
+                // let coinX = this.coinGroupX + getRandomNum(0, 50);
+                // let coinY = this.coinGroupY + getRandomNum(0, 50);
+
+                // if(coinX != this.obstacles.obstacleX && coinY != this.obstacles.obstacleY ){
+                    const lastCoin = this.coins[this.coins.length-1];
+                    const coinX = lastCoin ? lastCoin.x+30 : this.coinGroupX;
+                    const coin = new Coin(
+                        coinX, // Adjust the range based on your requirements
+                        this.coinGroupY, // Adjust the range based on your requirements
+                        20,
+                        20 
+                    );
+                    this.coins.push(coin);
+                // }
+                }
+                
           
             this.lastCoinTime = currentTime;
             this.coinGroupSize = getRandomNum(5, 10);
@@ -103,8 +140,8 @@ class ObstacleManager {
     }
 
     reset() {
-        this.obstacles = generateRandomObstacles(this.obstacles.length, 30, 30, this.canvasWidth, this.canvasHeight);
-
+        // this.obstacles = generateRandomObstacles(this.obstacles.length, 30, 30, this.canvasWidth, this.canvasHeight);
+        this.obstacles = generateRandomObstacles(this.count, this.width, this.height, this.canvasWidth, this.canvasHeight);
         // Reinitialize coins
         this.coins = [];
         this.lastCoinTime = Date.now();

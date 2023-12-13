@@ -41,6 +41,8 @@ const updateScorecard = (() =>{
     coinsElement.textContent = `${coinsCollected} \u{1F4B0}`;
 }});
 
+
+// for background movement count
 const increaseDistance = ((distance) =>{
     distanceTravelled += distance;
     updateScorecard();
