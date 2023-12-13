@@ -4,6 +4,9 @@
 let canvas = document.querySelector(".canvas");
 const ctx = canvas.getContext('2d');
 
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
 let x = 250;
 let y = canvas.height;
 
