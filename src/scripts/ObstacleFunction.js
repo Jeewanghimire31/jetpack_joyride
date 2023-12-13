@@ -70,18 +70,6 @@ class ObstacleManager {
     
             obstacle1.x -= this.speed;
             obstacle2.x -= this.speed;
-    
-            // Check if the obstacle1 is completely off-screen to the left, reset its position
-            // if (obstacle1.x + obstacle1.width < 0) {
-            //     obstacle1.x = this.canvasWidth; // Reset to the right side of the canvas
-            //     obstacle1.y = getRandomNum(0, this.canvasHeight - obstacle1.height); // Reset to a random y-coordinate
-            // }
-    
-            // // Check if the obstacle2 is completely off-screen to the left, reset its position
-            // if (obstacle2.x + obstacle2.width < 0) {
-            //     obstacle2.x = this.canvasWidth; // Reset to the right side of the canvas
-            //     obstacle2.y = getRandomNum(0, this.canvasHeight - obstacle2.height); // Reset to a random y-coordinate
-            // }
 
             if (obstacle1.x + obstacle1.width < 0 && obstacle2.x + obstacle2.width < 0) {
                 this.obstacles = generateRandomObstacles(this.count, this.width, this.height, this.canvasWidth, this.canvasHeight);
@@ -114,28 +102,27 @@ class ObstacleManager {
     generateCoins() {
         const currentTime = Date.now();
         if (currentTime - this.lastCoinTime > this.coinInterval) {
-            for (let i = 0; i < this.coinGroupSize; i++) {
-                // let coinX = this.coinGroupX + getRandomNum(0, 50);
-                // let coinY = this.coinGroupY + getRandomNum(0, 50);
-
-                // if(coinX != this.obstacles.obstacleX && coinY != this.obstacles.obstacleY ){
-                    const lastCoin = this.coins[this.coins.length-1];
-                    const coinX = lastCoin ? lastCoin.x+30 : this.coinGroupX;
-                    const coin = new Coin(
-                        coinX, // Adjust the range based on your requirements
-                        this.coinGroupY, // Adjust the range based on your requirements
-                        20,
-                        20 
-                    );
-                    this.coins.push(coin);
-                // }
-                }
-                
-          
             this.lastCoinTime = currentTime;
             this.coinGroupSize = getRandomNum(5, 10);
             this.coinGroupX = canvas.width; // Reset X position for the next coin group
             this.coinGroupY = getRandomNum(0, canvas.height - 150); // Reset Y position for the next coin group
+            
+        let randomCoin = Math.floor(getRandomNum(0, coinPattern.length));
+   this.cp = coinPattern[randomCoin];
+  this.cp.forEach(coin => {
+    let coinX = this.coinGroupX + coin.x;
+    let coinY = this.coinGroupY + coin.y;
+
+    console.log(coinX, coinY);
+    
+    const coinObj = new Coin(
+      this.coinGroupX + coin.x,
+      this.coinGroupY + coin.y,
+      20, 20
+    );
+    this.coins.push(coinObj);
+
+ });
         }
     }
 
