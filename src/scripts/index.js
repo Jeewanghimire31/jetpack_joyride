@@ -10,6 +10,8 @@ canvas.height = window.innerHeight;
 let x = 250;
 let y = canvas.height;
 
+let keyW = false;
+
 // alien property
 const alienInterval = 1000; // Adjust the interval between alien appearances as needed
 let lastAlienTime = Date.now();
@@ -65,7 +67,7 @@ const animate = ()=>{
 
     // update player position
     // player.x += vx;
-    player.y += vy;
+    // player.y += vy;
 
     // Check boundaries to prevent going outside the canvas
     // if (player.x < 0) player.x = 0;
@@ -78,6 +80,15 @@ const animate = ()=>{
 
     // Update bullets and check for collisions with aliens
     player.drawBullets(obstacleManager.aliens);
+
+    // Check keys
+    if(keyW) {
+      // shoot bullets
+      player.shoot(-95);
+      // move player upward
+      player.vy=-currentSpeed;
+      player.isGrounded = false;
+      } 
 
     // Update aliens
     // obstacleManager.updateAliens();
