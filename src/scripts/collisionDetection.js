@@ -2,8 +2,8 @@
 let collisionCount = 0;
 
 function checkCollision(character, obstacles, coins, aliens, missile) {
-  if(isCollision(character, missile)){
-    console.log("ma yeha xu");
+  if(isCollision(character, missile, platform)){
+    // console.log("ma yeha xu");
     collisionCount +=1;
         if(collisionCount == 1){
           setGameOver();
@@ -59,6 +59,12 @@ player.bullets.forEach((bullet, bulletIndex) => {
       }
   });
 });
+
+if(isCollision(character, platform)){
+console.log("hello i am here !!!")
+character.y = platform.y - character.height -0.01;
+character.vy = 0;
+}
 
   }
   
