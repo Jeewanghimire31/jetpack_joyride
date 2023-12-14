@@ -15,13 +15,15 @@ const alienInterval = 1000; // Adjust the interval between alien appearances as 
 let lastAlienTime = Date.now();
 
 // new player
-const player = new Character(x, y, 50, 50);
+const player = new Character(x, 200, 50, 50);
 
 // count, width, height, canvasWidth, canvasHeight, speed, interval
-const obstacleManager = new ObstacleManager(1, 30, 30, canvas.width, canvas.height, 100);
+const obstacleManager = new ObstacleManager(1, 30, 30, canvas.width, canvas.height-68, 100);
 
+// background audio
 const audio=document.querySelector("#audio")
 
+const platform = new Platform(canvas, ctx, increaseDistance);
 const background = new Background(canvas, ctx, increaseDistance);
 
 // missile
@@ -34,6 +36,10 @@ const animate = ()=>{
     if(!missile) {
       missile = new Missile(canvas, ctx);
     }
+
+    // draw platform
+    platform.draw();
+    platform.update();
 
     // Draw background
     background.update();
@@ -55,7 +61,7 @@ const animate = ()=>{
 
 
     // Check for collision with obstacles, coins, and aliens
-    checkCollision(player, obstacleManager.obstacles, obstacleManager.coins, obstacleManager.aliens, missile);
+    checkCollision(player, obstacleManager.obstacles, obstacleManager.coins, obstacleManager.aliens, missile, platform);
 
     // update player position
     // player.x += vx;

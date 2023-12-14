@@ -1,21 +1,9 @@
 
 let collisionCount = 0;
 
-function isCollision(character, obstacle) {
-    return (
-        // check the position of character and obstacles to detect
-        character.x + character.width >= obstacle.x &&
-        character.x <= obstacle.x + obstacle.width &&
-        character.y + character.height >= obstacle.y &&
-        character.y <= obstacle.y + obstacle.height 
-        
-    );
-}
-
-
 function checkCollision(character, obstacles, coins, aliens, missile) {
-  if(isCollision(character, missile)){
-    console.log("ma yeha xu");
+  if(isCollision(character, missile, platform)){
+    // console.log("ma yeha xu");
     collisionCount +=1;
         if(collisionCount == 1){
           setGameOver();
@@ -27,15 +15,9 @@ function checkCollision(character, obstacles, coins, aliens, missile) {
   obstacles.forEach((pair) => {
     const obstacle1 = pair.obstacle;
     const obstacle2 = pair.obstacle2;
-
     // Check if the character is within the range of one obstacle to another
-    if (
-        character.x + character.width >= obstacle1.x &&
-        character.x <= obstacle2.x + obstacle2.width &&
-        character.y + character.height >= Math.min(obstacle1.y, obstacle2.y) &&
-        character.y <= Math.max(obstacle1.y + obstacle1.height, obstacle2.y + obstacle2.height)
-    ) {
-        const score = new Score();
+    if(isCollision(character, obstacle1)||isCollision(character, obstacle2)){
+    const score = new Score();
         console.log('Collision with obstacle pair detected!');
         score.updateHighScore(distanceTravelled);
 
@@ -44,9 +26,8 @@ function checkCollision(character, obstacles, coins, aliens, missile) {
         if (collisionCount == 1) {
             setGameOver();
         }
-    }
+}
 });
-
   
     // coins collision
     coins.forEach((coin, index) => {
@@ -79,5 +60,19 @@ player.bullets.forEach((bullet, bulletIndex) => {
   });
 });
 
+if(isCollision(character, platform)){
+console.log("hello i am here !!!")
+character.y = platform.y - character.height -0.01;
+character.vy = 0;
+}
+
   }
   
+
+  // checking for whole position of obstacle pair and character
+  // if(
+//   (character.x + character.width >= obstacle1.x &&
+//   character.y + character.height >= obstacle1.y + obstacle1.height) ||
+// (character.x + character.width >= obstacle2.x &&
+//   character.y + character.height >= obstacle2.y + obstacle2.height)){
+//     console.log("collision with obstacle 2")
