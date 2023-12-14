@@ -58,8 +58,9 @@ const animate = ()=>{
   obstacleManager.update();
 
   obstacleManager.coins.forEach((coin) => {
+    coin.update(); // Update coin animation frame
     coin.draw(ctx);
-  });
+});
 
 
     // Check for collision with obstacles, coins, and aliens
