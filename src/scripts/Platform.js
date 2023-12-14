@@ -8,7 +8,6 @@ class Platform {
         this.x = 0;
         this.y = this.canvas.height-this.height;
         this.color = "rgba(255, 0,0, 0.2)";
-        this.isGrounded = false;
         this.platformImage = new Image();
         this.platformImage.src = "backgroundfloor.png";
         this.increaseDistance = increaseDistance;

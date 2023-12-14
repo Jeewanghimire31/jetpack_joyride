@@ -9,9 +9,11 @@ class Character {
         this.vx = 0;
         this.vy = 0;
         this.bullets = [];
+        this.isGrounded = false;
     }
 
     draw(ctx){
+        
         ctx.fillStyle = this.color;
         ctx.fillRect (this.x, this.y, this.width, this.height);
         this.y += this.vy;
@@ -20,7 +22,10 @@ class Character {
     }
     // gravity applied to player
     applyGravity() {
-        this.vy += GRAVITY;
+        if(!this.isGrounded) {
+            this.vy += GRAVITY;
+
+        }
     }
 
 

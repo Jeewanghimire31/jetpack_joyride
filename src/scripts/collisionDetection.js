@@ -18,7 +18,7 @@ function checkCollision(character, obstacles, coins, aliens, missile) {
     // Check if the character is within the range of one obstacle to another
     if(isCollision(character, obstacle1)||isCollision(character, obstacle2)){
     const score = new Score();
-        console.log('Collision with obstacle pair detected!');
+        // console.log('Collision with obstacle pair detected!');
         score.updateHighScore(distanceTravelled);
 
         // Handle collision logic with obstacle pairs here if needed
@@ -32,7 +32,7 @@ function checkCollision(character, obstacles, coins, aliens, missile) {
     // coins collision
     coins.forEach((coin, index) => {
       if (isCollision(character, coin)) {
-        console.log('Collision with coin detected!');
+        // console.log('Collision with coin detected!');
         // Handle collision logic with coins here
 
         increaseCoins();
@@ -50,7 +50,7 @@ function checkCollision(character, obstacles, coins, aliens, missile) {
 player.bullets.forEach((bullet, bulletIndex) => {
   aliens.forEach((alien, alienIndex) => {
       if (isCollision(bullet, alien)) {
-          console.log('Bullet hit alien!');
+          // console.log('Bullet hit alien!');
           // Handle bullet hit alien logic here
 
           // Remove the collided bullet and alien
@@ -61,9 +61,10 @@ player.bullets.forEach((bullet, bulletIndex) => {
 });
 
 if(isCollision(character, platform)){
-console.log("hello i am here !!!")
+// console.log("hello i am here !!!")
 character.y = platform.y - character.height -0.01;
 character.vy = 0;
+character.isGrounded = true;
 }
 
   }
