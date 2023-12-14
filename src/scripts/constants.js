@@ -2,10 +2,11 @@
 const GRAVITY = 0.5;
 
 // speed
-const SPEED = 10;
-const OBSTACLE_SPEED = 5;
-const ALIEN_SPEED = 2;
+const SPEED = 8;
+const OBSTACLE_SPEED = 4;
+const ALIEN_SPEED = 3;
 const MISSILE_SPEED = 10;
+const COIN_SPEED = 4.5;
 
 
 // missile

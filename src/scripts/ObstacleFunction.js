@@ -78,7 +78,7 @@ class ObstacleManager {
 
             // Move existing coins to the left
             this.coins.forEach((coin) => {
-                coin.x -= this.speed; // Assuming SPEED is a constant for the scrolling speed
+                coin.x -= COIN_SPEED; // Assuming SPEED is a constant for the scrolling speed
             });
     
             // Remove coins that have gone off the left side of the canvas
@@ -117,7 +117,7 @@ class ObstacleManager {
             const coinObj = new Coin(
                 this.coinGroupX + coin.x,
                 this.coinGroupY + coin.y,
-                20, 20
+                40, 40
               );
               this.coins.push(coinObj);
       
