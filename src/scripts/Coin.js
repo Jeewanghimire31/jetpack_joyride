@@ -16,7 +16,7 @@ class Coin {
       this.height = height;
       this.color = "yellow";
       this.image = new Image();
-      this.image.src = "coinssss.png";
+      this.image.src = "./src/img/coinssss.png";
 
       // Array to store Sprite objects for each frame
       this.sprites = imgArr.map(coords => new Sprite(this.image, ...coords));

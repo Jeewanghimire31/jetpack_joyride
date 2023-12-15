@@ -23,7 +23,7 @@ class Missile {
     this.width = 100;
     this.height = 50;
     this.image = new Image();
-    this.image.src = "missile.png"; // Replace with the path to your missile image
+    this.image.src = "./src/img/missile.png"; // Replace with the path to your missile image
     this.sprites = missileArr.map(coords => new Sprite(this.image, ...coords));
     this.currentSpriteIndex = 0;
     this.startMissile();
