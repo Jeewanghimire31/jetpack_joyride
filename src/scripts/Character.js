@@ -33,7 +33,6 @@ const IMAGES_BASED_ON_STATES = {
     "./src/img/character/dead/dead7.png",
     "./src/img/character/dead/dead8.png",
   ],
-
 };
 
 let index = 0;
@@ -103,7 +102,6 @@ class Character {
 
     // Draw the image
     ctx.drawImage(image, this.x, this.y, this.width, this.height);
-  
   }
 
   // gravity applied to player
