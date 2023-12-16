@@ -30,9 +30,9 @@ const obstacleManager = new ObstacleManager(
 // background audio
 const audio = document.querySelector("#audio");
 
-const power = new Power(canvas.width, getRandomNum(0, canvas.height-200), 50, 50);
-const invisibilityPower = new Power(1000, 100, 100, 100);
-const moreCoinPower = new Power(1000, 50, 100, 100);
+const power = new Power(50, 50);
+const invisibilityPower = new Power(50, 50);
+const moreCoinPower = new Power(50, 50);
 
 const platform = new Platform(canvas, ctx, increaseDistance);
 const background = new Background(canvas, ctx, increaseDistance);
@@ -63,13 +63,10 @@ const animate = () => {
   obstacleManager.update();
 
   power.draw(ctx);
-  power.update(ctx);
 
   invisibilityPower.draw(ctx);
-  invisibilityPower.update(ctx);
 
   moreCoinPower.draw(ctx);
-  moreCoinPower.update(ctx);
 
   const hasCollinsonOfCharacterWithPower = isCollision(player, power);
   if (hasCollinsonOfCharacterWithPower) {
