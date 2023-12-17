@@ -20,8 +20,8 @@ const player = new Character(x, 200, 100, 100);
 // count, width, height, canvasWidth, canvasHeight, speed, interval
 const obstacleManager = new ObstacleManager(
   1,
-  30,
-  30,
+  80,
+  80,
   canvas.width,
   canvas.height - 68,
   100
@@ -29,6 +29,10 @@ const obstacleManager = new ObstacleManager(
 
 // background audio
 const audio = document.querySelector("#audio");
+
+const power = new Power(50, 50, "speed");
+const invisibilityPower = new Power(50, 50, "invisibility");
+const moreCoinPower = new Power(50, 50, "moreCoin");
 
 const platform = new Platform(canvas, ctx, increaseDistance);
 const background = new Background(canvas, ctx, increaseDistance);
@@ -58,12 +62,44 @@ const animate = () => {
   // Update obstacles
   obstacleManager.update();
 
-  // Draw obstacles
-  obstacleManager.update();
+  power.draw(ctx);
+
+  invisibilityPower.draw(ctx);
+
+  moreCoinPower.draw(ctx);
+
+  const hasCollinsonOfCharacterWithPower = isCollision(player, power);
+  if (hasCollinsonOfCharacterWithPower) {
+    power.x = -1;
+    addSpeedPower();
+    setTimeout(revertSpeedPower, 5000);
+  }
+
+  const hasCollinsonOfCharacterWithInvisibilityPower = isCollision(
+    player,
+    invisibilityPower
+  );
+  if (hasCollinsonOfCharacterWithInvisibilityPower) {
+    invisibilityPower.x = -1;
+    addInvisibilityPower();
+    setTimeout(revertInvisibiltyPower, 20000);
+  }
+
+  const hasCollinsonOfCharacterWithMoreCoinPower = isCollision(
+    player,
+    moreCoinPower
+  );
+  if (hasCollinsonOfCharacterWithMoreCoinPower) {
+    moreCoinPower.x = -1;
+    addMoreCoinPower();
+    setTimeout(revertMoreCoinPower, 200000);
+  }
+
+  player.draw(ctx);
 
   obstacleManager.coins.forEach((coin) => {
     coin.draw(ctx);
-    coin.update(); // Update coin animation frame
+    coin.update(true); // Update coin animation frame
   });
 
   // Check for collision with obstacles, coins, and aliens
@@ -87,9 +123,6 @@ const animate = () => {
   if (player.y + player.height > canvas.height)
     player.y = canvas.height - player.height;
 
-  // Draw the player
-  player.draw(ctx);
-
   // Update bullets and check for collisions with aliens
   player.drawBullets(obstacleManager.aliens);
 
@@ -101,9 +134,9 @@ const animate = () => {
     player.vy = -currentSpeed;
     player.isGrounded = false;
     player.state = "flying";
-  }else if(player.isGrounded){
+  } else if (player.isGrounded) {
     player.state = "walking";
-  }else{
+  } else {
     player.state = "idle";
   }
 
@@ -120,6 +153,7 @@ const animate = () => {
   // Draw aliens
   obstacleManager.aliens.forEach((alien) => {
     alien.draw(ctx);
+    alien.update(ctx);
   });
 
   // Draw missiles
@@ -129,7 +163,30 @@ const animate = () => {
   requestAnimationFrame(animate);
 };
 
-// window.addEventListener("resize", (()=>{
-//   canvas.width =  window.innerWidth;
-//   canvas.height =  window.innerHeight;
-// }))
+const revertSpeedPower = () => {
+  background.speed = 8;
+  COIN_SPEED = 4.5;
+  INCREASE_SPEED_BY = 1;
+};
+
+const revertInvisibiltyPower = () => {
+  SHOULD_COLLIDE_WITH_OBSTACLE_AND_MISSILE = true;
+};
+
+const addInvisibilityPower = () => {
+  SHOULD_COLLIDE_WITH_OBSTACLE_AND_MISSILE = false;
+};
+
+const revertMoreCoinPower = () => {
+  HAS_COIN_POWER_UP = false;
+};
+
+const addMoreCoinPower = () => {
+  HAS_COIN_POWER_UP = true;
+};
+
+const addSpeedPower = () => {
+  background.speed = 20;
+  COIN_SPEED = 20;
+  INCREASE_SPEED_BY = 3;
+};
