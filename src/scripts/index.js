@@ -20,8 +20,8 @@ const player = new Character(x, 200, 100, 100);
 // count, width, height, canvasWidth, canvasHeight, speed, interval
 const obstacleManager = new ObstacleManager(
   1,
-  30,
-  30,
+  80,
+  80,
   canvas.width,
   canvas.height - 68,
   100
@@ -30,9 +30,9 @@ const obstacleManager = new ObstacleManager(
 // background audio
 const audio = document.querySelector("#audio");
 
-const power = new Power(50, 50);
-const invisibilityPower = new Power(50, 50);
-const moreCoinPower = new Power(50, 50);
+const power = new Power(50, 50, "speed");
+const invisibilityPower = new Power(50, 50, "invisibility");
+const moreCoinPower = new Power(50, 50, "moreCoin");
 
 const platform = new Platform(canvas, ctx, increaseDistance);
 const background = new Background(canvas, ctx, increaseDistance);
@@ -70,6 +70,7 @@ const animate = () => {
 
   const hasCollinsonOfCharacterWithPower = isCollision(player, power);
   if (hasCollinsonOfCharacterWithPower) {
+    power.x = -1;
     addSpeedPower();
     setTimeout(revertSpeedPower, 5000);
   }
@@ -79,6 +80,7 @@ const animate = () => {
     invisibilityPower
   );
   if (hasCollinsonOfCharacterWithInvisibilityPower) {
+    invisibilityPower.x = -1;
     addInvisibilityPower();
     setTimeout(revertInvisibiltyPower, 20000);
   }
@@ -88,6 +90,7 @@ const animate = () => {
     moreCoinPower
   );
   if (hasCollinsonOfCharacterWithMoreCoinPower) {
+    moreCoinPower.x = -1;
     addMoreCoinPower();
     setTimeout(revertMoreCoinPower, 200000);
   }
@@ -150,6 +153,7 @@ const animate = () => {
   // Draw aliens
   obstacleManager.aliens.forEach((alien) => {
     alien.draw(ctx);
+    alien.update(ctx);
   });
 
   // Draw missiles
