@@ -1,4 +1,3 @@
-
 const missileArr = [
   [324, 4, 57, 27],
   [277, 0, 50, 35],
@@ -13,7 +12,7 @@ class Missile {
   constructor(canvas, ctx) {
     this.canvas = canvas;
     this.ctx = ctx;
-    this.alertDiv = document.getElementById('alert');
+    this.alertDiv = document.getElementById("alert");
     this.missileSpeed = MISSILE_SPEED;
     this.missileInterval = MISSILE_INTERVAL;
     this.alertTime = ALERT_TIME;
@@ -24,14 +23,16 @@ class Missile {
     this.height = 50;
     this.image = new Image();
     this.image.src = "./src/img/missile.png"; // Replace with the path to your missile image
-    this.sprites = missileArr.map(coords => new Sprite(this.image, ...coords));
+    this.sprites = missileArr.map(
+      (coords) => new Sprite(this.image, ...coords)
+    );
     this.currentSpriteIndex = 0;
     this.startMissile();
   }
 
   startMissile() {
     this.x = this.canvas.width;
-    this.y = Math.random() * this.canvas.height-200;
+    this.y = getRandomNum(50,this.canvas.height - 200);
     clearInterval(this.alertTimer);
     this.alertTimer = setTimeout(() => {
       if (!gameOver) {
@@ -63,7 +64,6 @@ class Missile {
 
   moveMissile() {
     this.x -= this.missileSpeed;
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.drawMissile();
 
     if (this.x + 20 < 0) {
@@ -79,35 +79,39 @@ class Missile {
 
     // Update animation frame if enough time has passed
     if (elapsedTime >= this.animationInterval) {
-      this.currentSpriteIndex = (this.currentSpriteIndex + 1) % this.sprites.length;
+      this.currentSpriteIndex =
+        (this.currentSpriteIndex + 1) % this.sprites.length;
       this.lastFrameTime = currentTime;
     }
   }
 
   showAlert() {
-    // Your existing showAlert code remains unchanged
-            this.alertDiv.style.display = 'block';
-        this.alertDiv.style.top = `${this.y}px`;
-        this.alertDiv.style.right = `${this.canvas.width - this.x}px`;
+    this.alertDiv.image = new Image();
+    this.alertDiv.image.src = "./src/img/missileWarning";
+    this.alertDiv.style.display = "block";
+    this.alertDiv.style.top = `${this.y}px`;
+    this.alertDiv.style.right = `${this.canvas.width - this.x}px`;
 
-//  missile lunch sound
- const missileAlertAudio = new Audio("https://commondatastorage.googleapis.com/codeskulptor-assets/jump.ogg");
- missileAlertAudio.play();
-        const hideAlert = () => {
-          this.alertDiv.style.display = 'none';
-          cancelAnimationFrame(this.alertAnimation);
-        };
-      
-        const animateAlert = () => {
-          this.alertAnimation = requestAnimationFrame(animateAlert);
-          if (this.x + this.width < this.canvas.width - 1) { // Adjusted condition to hide 1 second before reaching canvas
-            hideAlert();
-          }
-        };
-      
-        setTimeout(() => {
-           
-          animateAlert();
-        }, this.alertTime);
+    //  missile lunch sound
+    const missileAlertAudio = new Audio(
+      "https://commondatastorage.googleapis.com/codeskulptor-assets/jump.ogg"
+    );
+    missileAlertAudio.play();
+    const hideAlert = () => {
+      this.alertDiv.style.display = "none";
+      cancelAnimationFrame(this.alertAnimation);
+    };
+
+    const animateAlert = () => {
+      this.alertAnimation = requestAnimationFrame(animateAlert);
+      if (this.x + this.width < this.canvas.width - 1) {
+        // Adjusted condition to hide 1 second before reaching canvas
+        hideAlert();
+      }
+    };
+
+    setTimeout(() => {
+      animateAlert();
+    }, this.alertTime);
   }
 }
