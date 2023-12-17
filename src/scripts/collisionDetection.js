@@ -66,6 +66,16 @@ function checkCollision(character, obstacles, coins, aliens, missile) {
     });
   });
 
+   // Bullet-Alien Collision remains unchanged
+   player.bullets.forEach((bullet, bulletIndex) => {
+      if (isCollision(bullet, platform)) {
+        console.log("hanyo hanyo")
+        // Remove the collided bullet and alien
+        player.bullets.splice(bulletIndex, 1);
+        // aliens.splice(alienIndex, 1);
+      }
+  });
+
   if (isCollision(character, platform)) {
     // console.log("hello i am here !!!")
     character.y = platform.y - character.height - 0.01;
