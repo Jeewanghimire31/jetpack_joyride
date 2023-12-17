@@ -35,6 +35,8 @@ const IMAGES_BASED_ON_STATES = {
   ],
 };
 
+
+
 let index = 0;
 
 class Character {
@@ -43,7 +45,7 @@ class Character {
     this.y = y;
     this.width = width;
     this.height = height;
-    this.color = "#000";
+    this.color = "rgba(255, 0,0, 0.2)";
     this.vx = 0;
     this.vy = 0;
     this.bullets = [];
@@ -61,28 +63,6 @@ class Character {
   }
 
   drawImageBasedOnState(ctx) {
-    // const image = new Image();
-    // switch (this.state) {
-    //     case "walking":
-    //     const walkSrc = IMAGES_BASED_ON_STATES[this.state][0];
-    //     image.src = walkSrc;
-    //     break;
-    //     case "flying":
-    //         const flySrc = IMAGES_BASED_ON_STATES.flying[0];
-    //         image.src = flySrc;
-    //         break;
-    //     case "idle":
-    //         const idleSrc = IMAGES_BASED_ON_STATES.idle[0];
-    //         image.src = idleSrc;
-    //         break;
-    //     case "dying":
-    //         const deadSrc = IMAGES_BASED_ON_STATES.dead[0];
-    //         image.src = deadSrc;
-    //         break;
-    // }
-
-    // ctx.drawImage(image, this.x, this.y, this.width, this.height);
-
     const image = new Image();
 
     // Get the array of images based on the current state
@@ -120,17 +100,17 @@ class Character {
     const vx = bulletSpeed * Math.cos(angleInRadians);
     const vy = -bulletSpeed * Math.sin(angleInRadians);
 
-    const bullet = new Bullet(
-      this.x + this.width - 5,
-      this.y + this.height,
-      5,
-      5,
-      5,
+    const bullet1 = new Bullet(
+      this.x + this.width/2-25,
+      this.y + this.height-33,
+      10,
+      50,
+      1,
       vx,
       vy
     );
-    const bullet2 = new Bullet(this.x, this.y + this.height, 5, 5, 5, -vx, vy);
-    this.bullets.push(bullet, bullet2, bullet, bullet2);
+    const bullet2 = new Bullet(this.x + this.width/2-25, this.y + this.height-33, 10, 50, 1, -vx, vy);
+    this.bullets.push(bullet1, bullet2, bullet1, bullet2);
 
     // bullet fire sound
     let bulletAudio = new Audio(
@@ -144,6 +124,10 @@ class Character {
     for (let i = this.bullets.length - 1; i >= 0; i--) {
       this.bullets[i].update();
       this.bullets[i].draw(ctx);
+
+      if(isCollision(Platform, this.bullets)){
+        console.log("yes hanyo")
+      }
 
       // Check if bullet goes off-screen and remove it
       if (this.bullets[i].y > canvas.height) {
