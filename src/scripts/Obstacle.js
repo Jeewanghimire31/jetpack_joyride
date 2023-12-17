@@ -7,11 +7,15 @@ class Obstacle {
         this.width = width;
         this.height = height;
         this.color = "#FF0000";
+        this.ZapperImage = new Image();
+        this.ZapperImage.src = "./src/img/zapperFire1.png";
+
     }
 
     draw(ctx) {
         ctx.fillStyle = this.color;
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        // ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.drawImage(this.ZapperImage, this.x, this.y, this.width, this.height);
     }
 }
 
