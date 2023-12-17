@@ -177,8 +177,8 @@ class ObstacleManager {
     const alien = new Alien(
       this.canvasWidth,
       this.canvasHeight - 30, // Adjust the height
-      20, // Adjust width
-      20 // Adjust height
+      50, // Adjust width
+      50 // Adjust height
     );
     this.aliens.push(alien);
   }
