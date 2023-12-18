@@ -92,7 +92,7 @@ const animate = () => {
   if (hasCollinsonOfCharacterWithMoreCoinPower) {
     moreCoinPower.x = -1;
     addMoreCoinPower();
-    setTimeout(revertMoreCoinPower, 200000);
+    setTimeout(revertMoreCoinPower, 20000);
   }
 
   character.draw(ctx);

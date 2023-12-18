@@ -53,8 +53,12 @@ class Character {
 
   draw(ctx) {
     this.drawImageBasedOnState(ctx);
-    // ctx.fillStyle = this.color;
-    // ctx.fillRect(this.x, this.y, this.width, this.height);
+
+    if(HAS_COIN_POWER_UP || !SHOULD_COLLIDE_WITH_OBSTACLE_AND_MISSILE){
+ ctx.fillStyle = this.color;
+    ctx.fillRect(this.x, this.y, this.width, this.height);
+    }
+   
     this.y += this.vy;
     this.applyGravity();
     this.drawBullets();
