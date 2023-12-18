@@ -14,8 +14,8 @@ let keyW = false;
 const alienInterval = 1000; // Adjust the interval between alien appearances as needed
 let lastAlienTime = Date.now();
 
-// new player
-const player = new Character(x, 200, 100, 100);
+// new character
+const character = new Character(x, 200, 100, 100);
 
 // count, width, height, canvasWidth, canvasHeight, speed, interval
 const obstacleManager = new ObstacleManager(
@@ -68,7 +68,7 @@ const animate = () => {
 
   moreCoinPower.draw(ctx);
 
-  const hasCollinsonOfCharacterWithPower = isCollision(player, power);
+  const hasCollinsonOfCharacterWithPower = isCollision(character, power);
   if (hasCollinsonOfCharacterWithPower) {
     power.x = -1;
     addSpeedPower();
@@ -76,7 +76,7 @@ const animate = () => {
   }
 
   const hasCollinsonOfCharacterWithInvisibilityPower = isCollision(
-    player,
+    character,
     invisibilityPower
   );
   if (hasCollinsonOfCharacterWithInvisibilityPower) {
@@ -86,7 +86,7 @@ const animate = () => {
   }
 
   const hasCollinsonOfCharacterWithMoreCoinPower = isCollision(
-    player,
+    character,
     moreCoinPower
   );
   if (hasCollinsonOfCharacterWithMoreCoinPower) {
@@ -95,7 +95,7 @@ const animate = () => {
     setTimeout(revertMoreCoinPower, 200000);
   }
 
-  player.draw(ctx);
+  character.draw(ctx);
 
   obstacleManager.coins.forEach((coin) => {
     coin.draw(ctx);
@@ -104,7 +104,7 @@ const animate = () => {
 
   // Check for collision with obstacles, coins, and aliens
   checkCollision(
-    player,
+    character,
     obstacleManager.obstacles,
     obstacleManager.coins,
     obstacleManager.aliens,
@@ -112,32 +112,32 @@ const animate = () => {
     platform
   );
 
-  // update player position
-  // player.x += vx;
-  // player.y += vy;
+  // update character position
+  // character.x += vx;
+  // character.y += vy;
 
   // Check boundaries to prevent going outside the canvas
-  // if (player.x < 0) player.x = 0;
-  if (player.y < 0) player.y = 0;
-  // if (player.x + player.width > canvas.width) player.x = canvas.width - player.width;
-  if (player.y + player.height > canvas.height)
-    player.y = canvas.height - player.height;
+  // if (character.x < 0) character.x = 0;
+  if (character.y < 0) character.y = 0;
+  // if (character.x + character.width > canvas.width) character.x = canvas.width - character.width;
+  if (character.y + character.height > canvas.height)
+    character.y = canvas.height - character.height;
 
   // Update bullets and check for collisions with aliens
-  player.drawBullets(obstacleManager.aliens);
+  character.drawBullets(obstacleManager.aliens);
 
   // Check keys
   if (keyW) {
     // shoot bullets
-    player.shoot(-95);
-    // move player upward
-    player.vy = -currentSpeed;
-    player.isGrounded = false;
-    player.state = "flying";
-  } else if (player.isGrounded) {
-    player.state = "walking";
+    character.shoot(-95);
+    // move character upward
+    character.vy = -currentSpeed;
+    character.isGrounded = false;
+    character.state = "flying";
+  } else if (character.isGrounded) {
+    character.state = "walking";
   } else {
-    player.state = "idle";
+    character.state = "idle";
   }
 
   // Update aliens

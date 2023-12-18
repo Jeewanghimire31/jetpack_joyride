@@ -35,8 +35,6 @@ const IMAGES_BASED_ON_STATES = {
   ],
 };
 
-
-
 let index = 0;
 
 class Character {
@@ -84,7 +82,7 @@ class Character {
     ctx.drawImage(image, this.x, this.y, this.width, this.height);
   }
 
-  // gravity applied to player
+  // gravity applied to character
   applyGravity() {
     if (!this.isGrounded) {
       this.vy += GRAVITY;
@@ -101,15 +99,23 @@ class Character {
     const vy = -bulletSpeed * Math.sin(angleInRadians);
 
     const bullet1 = new Bullet(
-      this.x + this.width/2-25,
-      this.y + this.height-33,
+      this.x + this.width / 2 - 25,
+      this.y + this.height - 33,
       10,
       50,
       1,
       vx,
       vy
     );
-    const bullet2 = new Bullet(this.x + this.width/2-25, this.y + this.height-33, 10, 50, 1, -vx, vy);
+    const bullet2 = new Bullet(
+      this.x + this.width / 2 - 25,
+      this.y + this.height - 33,
+      10,
+      50,
+      1,
+      -vx,
+      vy
+    );
     this.bullets.push(bullet1, bullet2, bullet1, bullet2);
 
     // bullet fire sound
@@ -125,8 +131,8 @@ class Character {
       this.bullets[i].update();
       this.bullets[i].draw(ctx);
 
-      if(isCollision(Platform, this.bullets)){
-        console.log("yes hanyo")
+      if (isCollision(Platform, this.bullets)) {
+        console.log("yes hanyo");
       }
 
       // Check if bullet goes off-screen and remove it

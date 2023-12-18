@@ -22,7 +22,7 @@ class Missile {
     this.width = 100;
     this.height = 50;
     this.image = new Image();
-    this.image.src = "./src/img/missile.png"; // Replace with the path to your missile image
+    this.image.src = "./src/img/missile.png"; 
     this.sprites = missileArr.map(
       (coords) => new Sprite(this.image, ...coords)
     );
@@ -86,6 +86,7 @@ class Missile {
   }
 
   showAlert() {
+    if(!gameOver){
     this.alertDiv.image = new Image();
     this.alertDiv.image.src = "./src/img/missileWarning";
     this.alertDiv.style.display = "block";
@@ -113,5 +114,6 @@ class Missile {
     setTimeout(() => {
       animateAlert();
     }, this.alertTime);
+  }
   }
 }
