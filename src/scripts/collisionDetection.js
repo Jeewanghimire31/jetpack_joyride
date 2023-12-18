@@ -14,7 +14,7 @@ function checkCollision(character, obstacles, coins, aliens, missile) {
 
   // obstacle pair collision
   obstacles.forEach((pair) => {
-    const obstacle1 = pair.obstacle;
+    const obstacle1 = pair.obstacle1;
     const obstacle2 = pair.obstacle2;
     // Check if the character is within the range of one obstacle to another
     if (
@@ -53,27 +53,27 @@ function checkCollision(character, obstacles, coins, aliens, missile) {
   });
 
   // Bullet-Alien Collision remains unchanged
-  player.bullets.forEach((bullet, bulletIndex) => {
+  character.bullets.forEach((bullet, bulletIndex) => {
     aliens.forEach((alien, alienIndex) => {
       if (isCollision(bullet, alien)) {
         // console.log('Bullet hit alien!');
         // Handle bullet hit alien logic here
 
         // Remove the collided bullet and alien
-        player.bullets.splice(bulletIndex, 1);
+        character.bullets.splice(bulletIndex, 1);
         aliens.splice(alienIndex, 1);
       }
     });
   });
 
-   // Bullet-Alien Collision remains unchanged
-   player.bullets.forEach((bullet, bulletIndex) => {
-      if (isCollision(bullet, platform)) {
-        console.log("hanyo hanyo")
-        // Remove the collided bullet and alien
-        player.bullets.splice(bulletIndex, 1);
-        // aliens.splice(alienIndex, 1);
-      }
+  // Bullet-Alien Collision remains unchanged
+  character.bullets.forEach((bullet, bulletIndex) => {
+    if (isCollision(bullet, platform)) {
+      // console.log("hanyo hanyo");
+      // Remove the collided bullet and alien
+      character.bullets.splice(bulletIndex, 1);
+      // aliens.splice(alienIndex, 1);
+    }
   });
 
   if (isCollision(character, platform)) {
