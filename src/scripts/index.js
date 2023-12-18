@@ -158,7 +158,7 @@ const animate = () => {
 
   // Draw missiles
   missile.drawMissile();
-  missile.update();
+  missile.update(); 
 
   requestAnimationFrame(animate);
 };

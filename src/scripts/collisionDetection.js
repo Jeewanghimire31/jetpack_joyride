@@ -14,7 +14,7 @@ function checkCollision(character, obstacles, coins, aliens, missile) {
 
   // obstacle pair collision
   obstacles.forEach((pair) => {
-    const obstacle1 = pair.obstacle;
+    const obstacle1 = pair.obstacle1;
     const obstacle2 = pair.obstacle2;
     // Check if the character is within the range of one obstacle to another
     if (
@@ -69,7 +69,7 @@ function checkCollision(character, obstacles, coins, aliens, missile) {
   // Bullet-Alien Collision remains unchanged
   character.bullets.forEach((bullet, bulletIndex) => {
     if (isCollision(bullet, platform)) {
-      console.log("hanyo hanyo");
+      // console.log("hanyo hanyo");
       // Remove the collided bullet and alien
       character.bullets.splice(bulletIndex, 1);
       // aliens.splice(alienIndex, 1);

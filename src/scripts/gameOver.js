@@ -3,48 +3,48 @@ let restartGame = false; // New flag to indicate whether to restart the game
 let gameOver_audio = new Audio("http://www.mario-museum.net/sons/smb_mat.wav");
 
 function setGameOver() {
-    gameOver = true;
-    mySound.pause();
-    gameOver_audio.play();
-    drawGameOverScreen();
+  gameOver = true;
+  mySound.pause();
+  gameOver_audio.play();
+  drawGameOverScreen();
 }
 
 function resetGame() {
-    collisionCount = 0;
-    gameOver = false;
-    restartGame = false; // Reset the restartGame flag
-    distanceTravelled = 0;
-    coinsCollected = 0;
-    background.position = 0;
-    obstacleManager.reset();
-    removeDialogContainer();
-    // Coin.reset();
-   
+  collisionCount = 0;
+  gameOver = false;
+  restartGame = false; // Reset the restartGame flag
+  distanceTravelled = 0;
+  coinsCollected = 0;
+  background.position = 0;
+  obstacleManager.reset();
+  removeDialogContainer();
+  HAS_COIN_POWER_UP && revertMoreCoinPower();
+  revertSpeedPower();
+  SHOULD_COLLIDE_WITH_OBSTACLE_AND_MISSILE && revertInvisibiltyPower();
+  // Coin.reset();
 }
 
 function isGameOver() {
-    return gameOver;
+  return gameOver;
 }
 
 function setRestartGame() {
-    restartGame = true;
+  restartGame = true;
 }
 
 function shouldRestartGame() {
-    return restartGame;
+  return restartGame;
 }
-
 
 // draw gameOver screen after game over
 function drawGameOverScreen() {
-    
-        // Blur the canvas
-        canvas.style.filter = 'blur(30px)';
+  // Blur the canvas
+  canvas.style.filter = "blur(30px)";
 
-        // Create the dialog box
-        const dialogContainer = document.createElement('div');
-        dialogContainer.classList.add("dialogContainer");
-        dialogContainer.innerHTML = `
+  // Create the dialog box
+  const dialogContainer = document.createElement("div");
+  dialogContainer.classList.add("dialogContainer");
+  dialogContainer.innerHTML = `
             <p class = "flew">You Flew</p>
             <p class = "flew__Distance">${distanceTravelled}m</p>
             <p class="flew__coinCollectedWhole">
@@ -55,28 +55,21 @@ function drawGameOverScreen() {
     
             <p class="flew_restart">Press Space to Restart</p>
         `;
-        
-        document.body.appendChild(dialogContainer);
 
-        // Remove the scorecard element
-  const scorecardElement = document.getElementById('scorecard');
+  document.body.appendChild(dialogContainer);
+
+  // Remove the scorecard element
+  const scorecardElement = document.getElementById("scorecard");
   if (scorecardElement) {
     scorecardElement.remove();
   }
-    
 }
 
 // remove gameover screen if need restart
-const removeDialogContainer = (()=>{
+const removeDialogContainer = () => {
+  const dialogContainer = document.querySelector(".dialogContainer");
+  // Reset the blur on the canvas
+  canvas.style.filter = "blur(0)";
 
-    const dialogContainer = document.querySelector(".dialogContainer");
-    // Reset the blur on the canvas
-    canvas.style.filter = 'blur(0)';
-    
-    dialogContainer.remove();
-});
-
-
-
-
-
+  dialogContainer.remove();
+};

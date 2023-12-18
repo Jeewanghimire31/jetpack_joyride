@@ -28,7 +28,7 @@ class ObstacleManager {
   draw(ctx) {
     // draw obstacles
     this.obstacles.forEach((pair) => {
-      const obstacle1 = pair.obstacle;
+      const obstacle1 = pair.obstacle1;
       const obstacle2 = pair.obstacle2;
 
       // Draw the obstacles
@@ -71,7 +71,7 @@ class ObstacleManager {
   update() {
     if (gameOver) return;
     this.obstacles.forEach((obstaclePair) => {
-      const obstacle1 = obstaclePair.obstacle;
+      const obstacle1 = obstaclePair.obstacle1;
       const obstacle2 = obstaclePair.obstacle2;
 
       obstacle1.x -= this.speed;
@@ -137,7 +137,7 @@ class ObstacleManager {
         );
         newCoins.push(coinObj);
       });
-      console.log(HAS_COIN_POWER_UP);
+      // console.log(HAS_COIN_POWER_UP);
       if (HAS_COIN_POWER_UP) {
         const replicatedCoinsLength = newCoins.length;
         let replicatedCoins = newCoins.map((el, index) => {
@@ -149,7 +149,7 @@ class ObstacleManager {
           );
         });
         this.coins = [...newCoins, ...replicatedCoins];
-        console.log(this.coins);
+        // console.log(this.coins);
       } else {
         this.coins = [...newCoins];
       }

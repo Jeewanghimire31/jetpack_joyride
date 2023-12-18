@@ -131,10 +131,6 @@ class Character {
       this.bullets[i].update();
       this.bullets[i].draw(ctx);
 
-      if (isCollision(Platform, this.bullets)) {
-        console.log("yes hanyo");
-      }
-
       // Check if bullet goes off-screen and remove it
       if (this.bullets[i].y > canvas.height) {
         this.bullets.splice(i, 1);
